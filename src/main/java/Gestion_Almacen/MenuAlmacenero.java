@@ -14,6 +14,8 @@ public class MenuAlmacenero {
                 System.out.println("2- Gestionar pedidos");
                 System.out.println("3- Confirmar envios");
                 System.out.println("4- Salir del sistema");
+                System.out.println();
+                System.out.println("Ingresa la opcion: ");
                 opci = scanner. nextInt();
 
             }while(opci != 4);

@@ -19,6 +19,8 @@ public class MenuAdministrador {
             System.out.println("7- Generar informe de inventario");
             System.out.println("8- Administrar roles y asignar roles");
             System.out.println("9- Salir del sistema");
+            System.out.println();
+            System.out.println("Ingresa la opcion: ");
             opci = scanner. nextInt();
 
         }while(opci != 9);

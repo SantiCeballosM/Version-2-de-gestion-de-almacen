@@ -13,6 +13,8 @@ public class MenuContador {
             System.out.println("1- Ver inventario de productos");
             System.out.println("2- Generar informe de inventario");
             System.out.println("3- Salir del sistema");
+            System.out.println();
+            System.out.println("Ingresa la opcion: ");
             opci = scanner. nextInt();
 
         }while(opci != 3);

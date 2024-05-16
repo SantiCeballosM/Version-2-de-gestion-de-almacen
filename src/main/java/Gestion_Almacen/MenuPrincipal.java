@@ -20,10 +20,13 @@ public class MenuPrincipal {
             switch (opci) {
                 case 1:
                     MenuAdministrador.main(new String[0]);
+                    break;
                 case 2:
                     MenuAlmacenero.main(new String[0]);
+                    break;
                 case 3:
                     MenuContador.main(new String[0]);
+                    break;
                 default:
                     System.out.println("Ups... opcion inavlida");
             }

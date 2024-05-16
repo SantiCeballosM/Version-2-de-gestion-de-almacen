@@ -8,7 +8,7 @@ public class MenuContador {
         Scanner scanner = new Scanner(System.in);
         int opci;
         do{
-            System.out.println("MENU ALMACENERO");
+            System.out.println("MENU CONTADOR");
             System.out.println();
             System.out.println("1- Ver inventario de productos");
             System.out.println("2- Generar informe de inventario");

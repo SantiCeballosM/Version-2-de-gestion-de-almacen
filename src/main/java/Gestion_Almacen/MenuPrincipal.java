@@ -28,6 +28,7 @@ public class MenuPrincipal {
                     MenuContador.main(new String[0]);
                     break;
                 default:
+
                     System.out.println("Ups... opcion inavlida");
             }
         }while(opci != 4);

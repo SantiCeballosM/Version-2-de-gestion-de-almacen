@@ -27,9 +27,13 @@ public class MenuPrincipal {
                 case 3:
                     MenuContador.main(new String[0]);
                     break;
+                case 4:
+                    System.out.println("Saliste del sistema");
+                    break;
                 default:
                     System.out.println("Ups... opcion inavlida");
             }
         }while(opci != 4);
+
     }
 }

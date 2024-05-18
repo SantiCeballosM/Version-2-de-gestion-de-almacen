@@ -1,12 +1,21 @@
 package Gestion_Almacen;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-public  class Pedido {
+
+public class Pedido {
     private int idPedido;
     private List<Producto> productos;
     private String estado;
     private Date fechaHora;
+
+    public Pedido(int idPedido, Date fechaHora) {
+        this.idPedido = idPedido;
+        this.productos = new ArrayList<>();
+        this.estado = "pendiente";
+        this.fechaHora = fechaHora;
+    }
 
     public int getIdPedido() {
         return idPedido;
@@ -40,10 +49,21 @@ public  class Pedido {
         this.fechaHora = fechaHora;
     }
 
-    public Pedido(int idPedido, List<Producto> productos, String estado, Date fechaHora) {
-        this.idPedido = idPedido;
-        this.productos = productos;
-        this.estado = estado;
-        this.fechaHora = fechaHora;
+    public void agregarProducto(Producto producto) {
+        productos.add(producto);
+    }
+
+    public void modificarProducto(int id, Producto productoModificado) {
+        for (int i = 0; i < productos.size(); i++) {
+            if (productos.get(i).getId() == id) {
+                productos.set(i, productoModificado);
+                return;
+            }
+        }
+        System.out.println("Producto no encontrado.");
+    }
+
+    public void eliminarProducto(int id) {
+        productos.removeIf(producto -> producto.getId() == id);
     }
 }

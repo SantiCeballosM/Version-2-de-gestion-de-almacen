@@ -60,7 +60,7 @@ public class Producto {
     public static void agregarProducto(Pedido pedido, Scanner scanner) {
         System.out.print("ID del Producto: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Limpiar el buffer
+        scanner.nextLine();
 
         System.out.print("Nombre: ");
         String nombre = scanner.nextLine();

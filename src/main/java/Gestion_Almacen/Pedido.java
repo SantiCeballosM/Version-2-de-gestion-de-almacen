@@ -7,6 +7,7 @@ import java.util.List;
 public class Pedido {
     private int idPedido;
     private List<Producto> productos;
+    private List<Pedido> pedidos;
     private String estado;
     private Date fechaHora;
 

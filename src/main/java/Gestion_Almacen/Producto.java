@@ -60,7 +60,7 @@ public class Producto {
     public static void agregarProducto(Pedido pedido, Scanner scanner) {
         System.out.print("ID del Producto: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Limpiar el buffer
+        scanner.nextLine();
 
         System.out.print("Nombre: ");
         String nombre = scanner.nextLine();
@@ -73,17 +73,17 @@ public class Producto {
 
         System.out.print("Cantidad en Stock: ");
         int cantidadStock = scanner.nextInt();
-        scanner.nextLine(); // Limpiar el buffer
+        scanner.nextLine();
 
         Producto nuevoProducto = new Producto(id, nombre, descripcion, precio, cantidadStock);
-        pedido.agregarProducto(nuevoProducto);
+        pedido.agregarProducto(nuevoProducto, 1); // Cambié la cantidad a 1 ya que estamos agregando un nuevo producto único al inventario
         System.out.println("Producto agregado exitosamente.");
     }
 
     public static void modificarProducto(Pedido pedido, Scanner scanner) {
         System.out.print("ID del Producto a modificar: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Limpiar el buffer
+        scanner.nextLine();
 
         System.out.print("Nuevo Nombre: ");
         String nombre = scanner.nextLine();
@@ -106,7 +106,7 @@ public class Producto {
     public static void eliminarProducto(Pedido pedido, Scanner scanner) {
         System.out.print("ID del Producto a eliminar: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Limpiar el buffer
+        scanner.nextLine();
 
         pedido.eliminarProducto(id);
         System.out.println("Producto eliminado exitosamente.");

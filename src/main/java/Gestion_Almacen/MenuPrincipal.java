@@ -31,6 +31,7 @@ public class MenuPrincipal {
                     System.out.println("Saliste del sistema");
                     break;
                 default:
+
                     System.out.println("Ups... opcion inavlida");
             }
         }while(opci != 4);

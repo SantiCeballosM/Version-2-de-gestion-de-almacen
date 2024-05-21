@@ -5,7 +5,8 @@ import java.util.Scanner;
 
 public class MenuAdministrador {
     public static void main(String[] args) {
-        Login adminLogin = new Login();
+        Usuario adminUsuario = new Usuario();
+        Usuario usuarioMenu = new Usuario();
         Scanner scanner = new Scanner(System.in);
         boolean loggedIn = false;
         Pedido pedido = new Pedido(1, new Date());
@@ -17,7 +18,7 @@ public class MenuAdministrador {
             System.out.print("Contraseña: ");
             String contrasena = scanner.nextLine();
 
-            if (adminLogin.verificarLoginAdmin(usuario, contrasena)) {
+            if (adminUsuario.verificarLoginAdmin(usuario, contrasena)) {
                 System.out.println("Login exitoso. ¡Bienvenido Administrador!");
                 int opcion;
                 do {
@@ -83,7 +84,7 @@ public class MenuAdministrador {
                             // Informe de inventario
                             break;
                         case 11:
-                            // Administrar roles y asignar roles
+                            usuarioMenu.MenuGestionUsuarios();
                             break;
                         case 12:
                             System.out.println("Salir del sistema...");

@@ -8,11 +8,8 @@ import java.util.Scanner;
 public class Pedido {
     private int idPedido;
     private List<Producto> productos;
-<<<<<<< HEAD
     private List<Pedido> pedidos;
-=======
     private static List<Pedido> pedidosss = new ArrayList<>();
->>>>>>> ffc88a3b72aeb1520d67785d54f1f72000e94c46
     private String estado;
     private Date fechaHora;
 
@@ -125,6 +122,7 @@ public class Pedido {
             if (cantidad <= productoSeleccionado.getCantidadStock()) {
                 productoSeleccionado.setCantidadStock(productoSeleccionado.getCantidadStock() - cantidad);
                 nuevoPedido.agregarProducto(productoSeleccionado, cantidad);
+
                 System.out.println("Producto agregado al pedido exitosamente.");
             } else {
                 System.out.println("No hay suficientes productos en el inventario para el pedido.");
@@ -242,8 +240,5 @@ public class Pedido {
 
         System.out.println("Pedido modificado exitosamente.");
     }
-
-
-
 
 }

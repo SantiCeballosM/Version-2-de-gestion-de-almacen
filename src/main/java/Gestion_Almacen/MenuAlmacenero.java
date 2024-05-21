@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class MenuAlmacenero {
 
     public static void main (String[] args){
-        Login almaceLogin = new Login();
+        Usuario almaceUsuario = new Usuario();
         Scanner scanner = new Scanner(System.in);
         boolean loggedIn = false;
         while (!loggedIn) {
@@ -14,7 +14,7 @@ public class MenuAlmacenero {
 
             System.out.print("Contraseña: ");
             String contrasena = scanner.nextLine();
-            if (almaceLogin.verificarLoginAlmace(usuario, contrasena)) {
+            if (almaceUsuario.verificarLoginAlmace(usuario, contrasena)) {
                 System.out.println("Login exitoso. ¡Bienvenido Almacenero!");
                 int opci;
                 do {

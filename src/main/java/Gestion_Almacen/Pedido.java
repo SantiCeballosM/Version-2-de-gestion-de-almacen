@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class Pedido {
     private int idPedido;
     private List<Producto> productos;
-    private List<Pedido> pedidos;
     private static List<Pedido> pedidosss = new ArrayList<>();
     private String estado;
     private Date fechaHora;
@@ -137,10 +136,29 @@ public class Pedido {
 
         pedidosss.add(nuevoPedido);
         System.out.println("Pedido confirmado exitosamente.");
-
+        System.out.println();
+        System.out.println("ESTABLECER EL ESTADO DEL PEDIDO");
+        System.out.println();
+        System.out.println("1- Pendiente");
+        System.out.println("2- En proceso");
+        System.out.println("3- Entregado");
+        System.out.println();
         System.out.println("Ingrese el estado del pedido:");
-        System.out.print("(pendiente, en proceso, entregado, cancelado): ");
-        String estadoPedido = scanner.nextLine().trim().toLowerCase();
+        int estadooo = scanner.nextInt();
+        //System.out.print("(pendiente, en proceso, entregado, cancelado): ");
+        //String estadoPedido = scanner.nextLine().trim().toLowerCase();
+        String estadoPedido = "";
+        switch (estadooo){
+            case 1:
+                estadoPedido = "Pendiente";
+                break;
+            case 2:
+                estadoPedido = "En proceso";
+                break;
+            case 3:
+                estadoPedido = "Entregado";
+                break;
+        }
         nuevoPedido.setEstado(estadoPedido);
     }
 
@@ -188,8 +206,9 @@ public class Pedido {
             System.out.println("Pedido no encontrado.");
             return;
         }
-
+        /*
         boolean continuar = true;
+
         while (continuar) {
             Producto.mostrarProductos(pedidoAModificar);
             System.out.println("_______________________");
@@ -232,10 +251,30 @@ public class Pedido {
                 continuar = false;
             }
         }
-
-        System.out.println("Ingrese el estado del pedido:");
-        System.out.print("(pendiente, en proceso, entregado, cancelado): ");
-        String estadoPedido = scanner.nextLine().trim().toLowerCase();
+        */
+        System.out.println();
+        System.out.println("MODIFICACION DEL ESTADO DEL PEDIDO");
+        System.out.println();
+        System.out.println("1- Pendiente");
+        System.out.println("2- En proceso");
+        System.out.println("3- Entregado");
+        System.out.println();
+        System.out.println("Ingrese el nuevo estado del pedido:");
+        int estadooo = scanner.nextInt();
+        //System.out.print("(pendiente, en proceso, entregado): ");
+        //String estadoPedido = scanner.nextLine().trim().toLowerCase();
+        String estadoPedido = "";
+        switch (estadooo){
+            case 1:
+                estadoPedido = "Pendiente";
+                break;
+            case 2:
+                estadoPedido = "En proceso";
+                break;
+            case 3:
+                estadoPedido = "Entregado";
+                break;
+        }
         pedidoAModificar.setEstado(estadoPedido);
 
         System.out.println("Pedido modificado exitosamente.");

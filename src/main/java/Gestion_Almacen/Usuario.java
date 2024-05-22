@@ -2,10 +2,12 @@ package Gestion_Almacen;
 
 import java.util.HashMap;
 import java.util.Scanner;
+
 public class Usuario {
     private HashMap<String, String> administradores;
     private HashMap<String, String> almaceneros;
     private HashMap<String, String> contadores;
+    private Scanner scanner;
 
     public Usuario() {
         administradores = new HashMap<>();
@@ -15,19 +17,23 @@ public class Usuario {
         administradores.put("admin", "admin123");
         almaceneros.put("almace", "almace123");
         contadores.put("cont", "cont123");
+
+        scanner = new Scanner(System.in);
     }
 
     public boolean verificarLoginAdmin(String usuario, String contrasena) {
         return administradores.containsKey(usuario) && administradores.get(usuario).equals(contrasena);
     }
+
     public boolean verificarLoginAlmace(String usuario, String contrasena) {
         return almaceneros.containsKey(usuario) && almaceneros.get(usuario).equals(contrasena);
     }
+
     public boolean verificarLoginCont(String usuario, String contrasena) {
         return contadores.containsKey(usuario) && contadores.get(usuario).equals(contrasena);
     }
+
     public void agregarUsuarioConRol() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Seleccione el rol del usuario:");
         System.out.println("1 - Administrador");
         System.out.println("2 - Almacenero");
@@ -57,10 +63,9 @@ public class Usuario {
                 break;
         }
         System.out.println("Usuario agregado exitosamente con el rol seleccionado.");
-        scanner.close();
     }
+
     public void mostrarUsuarios() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Seleccione qué usuarios desea ver:");
         System.out.println("1 - Todos los usuarios");
         System.out.println("2 - Solo administradores");
@@ -91,7 +96,6 @@ public class Usuario {
                 System.out.println("Opción no válida.");
                 break;
         }
-        scanner.close();
     }
 
     private void mostrarTodosLosUsuarios() {
@@ -120,8 +124,8 @@ public class Usuario {
             System.out.println("Usuario: " + usuario);
         }
     }
+
     public void eliminarUsuario() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Seleccione qué tipo de usuario desea eliminar:");
         System.out.println("1 - Administrador");
         System.out.println("2 - Almacenero");
@@ -147,7 +151,6 @@ public class Usuario {
     }
 
     private void eliminarUsuario(HashMap<String, String> usuarios) {
-        Scanner scanner = new Scanner(System.in);
         System.out.print("Ingrese el nombre de usuario que desea eliminar: ");
         String usuario = scanner.nextLine();
 
@@ -158,8 +161,8 @@ public class Usuario {
             System.out.println("El usuario ingresado no existe.");
         }
     }
+
     public void modificarUsuario() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Seleccione qué tipo de usuario desea modificar:");
         System.out.println("1 - Administrador");
         System.out.println("2 - Almacenero");
@@ -183,8 +186,8 @@ public class Usuario {
                 break;
         }
     }
+
     private void modificarUsuario(HashMap<String, String> usuarios) {
-        Scanner scanner = new Scanner(System.in);
         System.out.print("Ingrese el nombre de usuario que desea modificar: ");
         String usuario = scanner.nextLine();
 
@@ -197,8 +200,8 @@ public class Usuario {
             System.out.println("El usuario ingresado no existe.");
         }
     }
+
     public void MenuGestionUsuarios() {
-        Scanner scanner = new Scanner(System.in);
         int opcion_usuarios;
         do {
             System.out.println();
@@ -233,7 +236,5 @@ public class Usuario {
                     break;
             }
         } while (opcion_usuarios != 5);
-
-        scanner.close();
     }
 }

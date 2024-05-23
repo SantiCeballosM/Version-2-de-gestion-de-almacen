@@ -18,7 +18,7 @@ public class Producto {
         this.descripcion = descripcion;
         this.precio = precio;
         this.cantidadStock = cantidadStock;
-        productos.add(this); // Añade el producto a la lista estática de productos
+        productos.add(this);
     }
 
     public int getId() {

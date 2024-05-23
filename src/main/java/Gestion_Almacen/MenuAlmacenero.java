@@ -5,12 +5,10 @@ import java.util.Scanner;
 
 public class MenuAlmacenero {
 
-    public static void main (String[] args){
+    public static void main(String[] args) {
         Usuario almaceUsuario = new Usuario();
         Informe informe = new Informe();
         Pedido pedido = new Pedido(1, new Date());
-        Informe ventas = new Informe();
-        Informe informeInventario = new Informe();
         Scanner scanner = new Scanner(System.in);
         boolean loggedIn = false;
         while (!loggedIn) {
@@ -48,7 +46,6 @@ public class MenuAlmacenero {
                             Pedido.modificarPedido(pedido, scanner);
                             break;
                         case 4:
-                            System.out.println("Pedidos actuales:");
                             Pedido.mostrarPedidos();
                             Pedido.eliminarPedido(scanner);
                             break;

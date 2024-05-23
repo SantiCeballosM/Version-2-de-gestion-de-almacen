@@ -73,7 +73,7 @@ public class Pedido {
     public void eliminarProducto(int id) {
         productos.entrySet().removeIf(entry -> entry.getKey().getId() == id);
     }
-
+/*
     public static void gestionarPedido(Pedido pedido, Scanner scanner) {
         Pedido nuevoPedido = new Pedido(getPedidosss().size() + 1, new Date());
         boolean continuar = true;
@@ -144,10 +144,87 @@ public class Pedido {
         }
         nuevoPedido.setEstado(estadoPedido);
     }
+*/
+public static void gestionarPedido(Pedido pedido, Scanner scanner) {
+    Pedido nuevoPedido = new Pedido(getPedidosss().size() + 1, new Date());
+    boolean continuar = true;
+
+    while (continuar) {
+        // Mostrar los productos disponibles
+        System.out.println("Lista de Productos:");
+        for (Producto producto : Producto.getProductos()) {
+            System.out.println("ID: " + producto.getId() + ", Nombre: " + producto.getNombre() + ", Descripción: " + producto.getDescripcion() + ", Precio: " + producto.getPrecio() + ", Cantidad en Stock: " + producto.getCantidadStock());
+        }
+        System.out.println("_______________________");
+        System.out.print("Ingrese el ID del producto que desea llevar: ");
+        int idProducto = scanner.nextInt();
+        scanner.nextLine();
+
+        Producto productoSeleccionado = null;
+        for (Producto producto : Producto.getProductos()) {
+            if (producto != null && producto.getId() == idProducto) {
+                productoSeleccionado = producto;
+                break;
+            }
+        }
+
+        if (productoSeleccionado == null) {
+            System.out.println("El ID del producto ingresado no es válido.");
+            continue;
+        }
+        System.out.println("_______________________");
+        System.out.print("Ingrese la cantidad de productos que desea llevar: ");
+        int cantidad = scanner.nextInt();
+        scanner.nextLine();
+
+        if (cantidad <= productoSeleccionado.getCantidadStock()) {
+            productoSeleccionado.setCantidadStock(productoSeleccionado.getCantidadStock() - cantidad);
+            nuevoPedido.agregarProducto(productoSeleccionado, cantidad);
+
+            System.out.println("Producto agregado al pedido exitosamente.");
+        } else {
+            System.out.println("No hay suficientes productos en el inventario para el pedido.");
+        }
+
+        System.out.print("¿Desea agregar otro producto al pedido? (s/n): ");
+        String respuesta = scanner.nextLine();
+        if (!respuesta.equalsIgnoreCase("s")) {
+            continuar = false;
+        }
+    }
+
+    pedidosss.add(nuevoPedido);
+    System.out.println("Pedido confirmado exitosamente.");
+    System.out.println();
+    System.out.println("ESTABLECER EL ESTADO DEL PEDIDO");
+    System.out.println();
+    System.out.println("1- Pendiente");
+    System.out.println("2- En proceso");
+    System.out.println("3- Entregado");
+    System.out.println();
+    System.out.println("Ingrese el estado del pedido:");
+    int estadooo = scanner.nextInt();
+
+    String estadoPedido = "";
+    switch (estadooo){
+        case 1:
+            estadoPedido = "Pendiente";
+            break;
+        case 2:
+            estadoPedido = "En proceso";
+            break;
+        case 3:
+            estadoPedido = "Entregado";
+            break;
+    }
+    nuevoPedido.setEstado(estadoPedido);
+}
 
     public static void mostrarPedidos() {
         for (Pedido p : pedidosss) {
+            System.out.println("PEDIDOS");
             System.out.println("_______________________");
+            System.out.println();
             System.out.println("Pedido ID: " + p.getIdPedido() + ", Fecha: " + p.getFechaHora() + ", Estado: " + p.getEstado());
             for (Map.Entry<Producto, Integer> entry : p.getProductos().entrySet()) {
                 Producto producto = entry.getKey();

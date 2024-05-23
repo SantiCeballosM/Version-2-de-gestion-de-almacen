@@ -9,6 +9,8 @@ public class MenuAlmacenero {
         Usuario almaceUsuario = new Usuario();
         Informe informe = new Informe();
         Pedido pedido = new Pedido(1, new Date());
+        Informe ventas = new Informe();
+        Informe informeInventario = new Informe();
         Scanner scanner = new Scanner(System.in);
         boolean loggedIn = false;
         while (!loggedIn) {

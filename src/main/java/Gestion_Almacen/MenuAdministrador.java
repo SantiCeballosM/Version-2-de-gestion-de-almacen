@@ -11,10 +11,10 @@ public class MenuAdministrador {
         Informe ventas = new Informe();
         Informe informeInventario = new Informe();
         Scanner scanner = new Scanner(System.in);
-        boolean loggedIn = false;
+        int aux = 0;
 
 
-        while (!loggedIn) {
+        while (aux == 0) {
             System.out.print("Usuario: ");
             String usuario = scanner.nextLine();
 
@@ -23,6 +23,7 @@ public class MenuAdministrador {
 
             if (adminUsuario.verificarLoginAdmin(usuario, contrasena)) {
                 System.out.println("Login exitoso. ¡Bienvenido Administrador!");
+                System.out.println();
                 int opcion;
                 do {
                     System.out.println();
@@ -91,6 +92,7 @@ public class MenuAdministrador {
                             break;
                         case 12:
                             System.out.println("Salir del sistema...");
+
                             break;
 
                         default:
@@ -98,11 +100,12 @@ public class MenuAdministrador {
                             break;
                     }
                 } while (opcion != 12);
-                loggedIn = true;
+
             } else {
                 System.out.println("Usuario o contraseña incorrectos. Inténtalo de nuevo.");
             }
+            aux = 1;
         }
-        scanner.close();
+
     }
 }

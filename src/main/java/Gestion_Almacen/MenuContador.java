@@ -23,7 +23,7 @@ public class MenuContador {
                     System.out.println();
                     System.out.println("1- Ver inventario de productos");
                     System.out.println("2- Ver inventario de ventas");
-                    System.out.println("2- Salir del sistema");
+                    System.out.println("3- Salir del sistema");
                     System.out.println();
                     System.out.println("Ingresa la opcion: ");
                     opci = scanner. nextInt();
@@ -35,11 +35,14 @@ public class MenuContador {
                         case 2:
                             ventas.generarInformeVentas();
                             break;
+                        case 3:
+                            System.out.println("Saliendo del sistema...");
+                            break;
                         default:
                             System.out.println("Ups opcion invalida");
                             break;
                     }
-                }while(opci != 2);
+                }while(opci != 3);
                 loggedIn = true;
             } else {
                 System.out.println("Usuario o contraseña incorrectos. Inténtalo de nuevo.");

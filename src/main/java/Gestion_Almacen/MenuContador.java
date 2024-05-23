@@ -6,6 +6,7 @@ public class MenuContador {
     public static void main (String[] args){
         Usuario contUsuario = new Usuario();
         Informe informe = new Informe();
+        Informe ventas = new Informe();
         Scanner scanner = new Scanner(System.in);
         boolean loggedIn = false;
         while (!loggedIn) {
@@ -32,7 +33,7 @@ public class MenuContador {
                             informe.generarInformeInventario();
                             break;
                         case 2:
-                            //inventario de ventas
+                            ventas.generarInformeVentas();
                             break;
                         default:
                             System.out.println("Ups opcion invalida");

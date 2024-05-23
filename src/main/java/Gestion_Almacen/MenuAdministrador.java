@@ -8,6 +8,7 @@ public class MenuAdministrador {
         Usuario adminUsuario = new Usuario();
         Usuario usuarioMenu = new Usuario();
         Pedido pedido = new Pedido(1, new Date());
+        Informe ventas = new Informe();
         Informe informeInventario = new Informe();
         Scanner scanner = new Scanner(System.in);
         boolean loggedIn = false;
@@ -80,7 +81,7 @@ public class MenuAdministrador {
                             Pedido.mostrarPedidos();
                             break;
                         case 9:
-                            // Informe de venta
+                            ventas.generarInformeVentas();
                             break;
                         case 10:
                             informeInventario.generarInformeInventario();

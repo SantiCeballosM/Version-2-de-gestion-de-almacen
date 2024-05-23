@@ -1,5 +1,7 @@
 package Gestion_Almacen;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Producto {
@@ -8,6 +10,7 @@ public class Producto {
     private String descripcion;
     private double precio;
     private int cantidadStock;
+    private static List<Producto> productos = new ArrayList<>();
 
     public Producto(int id, String nombre, String descripcion, double precio, int cantidadStock) {
         this.id = id;
@@ -15,6 +18,7 @@ public class Producto {
         this.descripcion = descripcion;
         this.precio = precio;
         this.cantidadStock = cantidadStock;
+        productos.add(this); // Añade el producto a la lista estática de productos
     }
 
     public int getId() {
@@ -55,6 +59,10 @@ public class Producto {
 
     public void setCantidadStock(int cantidadStock) {
         this.cantidadStock = cantidadStock;
+    }
+
+    public static List<Producto> getProductos() {
+        return productos;
     }
 
     public static void agregarProducto(Pedido pedido, Scanner scanner) {

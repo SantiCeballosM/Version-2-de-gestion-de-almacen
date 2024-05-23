@@ -9,15 +9,11 @@ public class Pedido {
     private String estado;
     private Date fechaHora;
 
-
-
-
     public Pedido(int idPedido, Date fechaHora) {
         this.idPedido = idPedido;
         this.productos = new HashMap<>();
         this.estado = "pendiente";
         this.fechaHora = fechaHora;
-
     }
 
     public int getIdPedido() {
@@ -60,7 +56,6 @@ public class Pedido {
         this.fechaHora = fechaHora;
     }
 
-    // Método para agregar un producto con una cantidad específica
     public void agregarProducto(Producto producto, int cantidad) {
         productos.put(producto, cantidad);
     }
@@ -134,8 +129,7 @@ public class Pedido {
         System.out.println();
         System.out.println("Ingrese el estado del pedido:");
         int estadooo = scanner.nextInt();
-        //System.out.print("(pendiente, en proceso, entregado, cancelado): ");
-        //String estadoPedido = scanner.nextLine().trim().toLowerCase();
+
         String estadoPedido = "";
         switch (estadooo){
             case 1:

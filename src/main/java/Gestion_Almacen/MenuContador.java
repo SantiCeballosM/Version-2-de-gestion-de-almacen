@@ -31,6 +31,9 @@ public class MenuContador {
                         case 1:
                             informe.generarInformeInventario();
                             break;
+                        case 2:
+                            //inventario de ventas
+                            break;
                         default:
                             System.out.println("Ups opcion invalida");
                             break;

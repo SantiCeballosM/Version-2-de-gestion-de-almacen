@@ -1,34 +1,24 @@
 package Gestion_Almacen;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Pedido {
     private int idPedido;
-    private List<Producto> productos;
+    private Map<Producto, Integer> productos;
     private static List<Pedido> pedidosss = new ArrayList<>();
     private String estado;
     private Date fechaHora;
 
-    static {
-        pedidosss.add(new Pedido(1, new Date()));
-    }
+
+
 
     public Pedido(int idPedido, Date fechaHora) {
         this.idPedido = idPedido;
-        this.productos = new ArrayList<>();
+        this.productos = new HashMap<>();
         this.estado = "pendiente";
         this.fechaHora = fechaHora;
 
-        productos.add(new Producto(1, "Colchón", "Colchón para basecama", 150000, 40));
-        productos.add(new Producto(2, "Silla", "Silla de oficina ergonómica", 50000, 30));
-        productos.add(new Producto(3, "Mesa", "Mesa de comedor de madera", 120000, 15));
-
-        this.estado = "pendiente";
     }
-
 
     public int getIdPedido() {
         return idPedido;
@@ -38,11 +28,11 @@ public class Pedido {
         this.idPedido = idPedido;
     }
 
-    public List<Producto> getProductos() {
+    public Map<Producto, Integer> getProductos() {
         return productos;
     }
 
-    public void setProductos(List<Producto> productos) {
+    public void setProductos(Map<Producto, Integer> productos) {
         this.productos = productos;
     }
 
@@ -70,16 +60,15 @@ public class Pedido {
         this.fechaHora = fechaHora;
     }
 
+    // Método para agregar un producto con una cantidad específica
     public void agregarProducto(Producto producto, int cantidad) {
-        for (int i = 0; i < cantidad; i++) {
-            productos.add(producto);
-        }
+        productos.put(producto, cantidad);
     }
 
     public void modificarProducto(int id, Producto productoModificado) {
-        for (int i = 0; i < productos.size(); i++) {
-            if (productos.get(i).getId() == id) {
-                productos.set(i, productoModificado);
+        for (Producto producto : productos.keySet()) {
+            if (producto.getId() == id) {
+                productos.put(productoModificado, productos.remove(producto));
                 return;
             }
         }
@@ -87,11 +76,11 @@ public class Pedido {
     }
 
     public void eliminarProducto(int id) {
-        productos.removeIf(producto -> producto.getId() == id);
+        productos.entrySet().removeIf(entry -> entry.getKey().getId() == id);
     }
 
     public static void gestionarPedido(Pedido pedido, Scanner scanner) {
-        Pedido nuevoPedido = new Pedido(pedido.getPedidosss().size() + 1, new Date());
+        Pedido nuevoPedido = new Pedido(getPedidosss().size() + 1, new Date());
         boolean continuar = true;
 
         while (continuar) {
@@ -102,7 +91,7 @@ public class Pedido {
             scanner.nextLine();
 
             Producto productoSeleccionado = null;
-            for (Producto producto : pedido.getProductos()) {
+            for (Producto producto : pedido.getProductos().keySet()) {
                 if (producto != null && producto.getId() == idProducto) {
                     productoSeleccionado = producto;
                     break;
@@ -166,13 +155,14 @@ public class Pedido {
         for (Pedido p : pedidosss) {
             System.out.println("_______________________");
             System.out.println("Pedido ID: " + p.getIdPedido() + ", Fecha: " + p.getFechaHora() + ", Estado: " + p.getEstado());
-            for (Producto producto : p.getProductos()) {
-                System.out.println("Producto ID: " + producto.getId() + ", Nombre: " + producto.getNombre() + ", Cantidad: " + p.getProductos().stream().filter(prod -> prod.getId() == producto.getId()).count());
+            for (Map.Entry<Producto, Integer> entry : p.getProductos().entrySet()) {
+                Producto producto = entry.getKey();
+                int cantidad = entry.getValue();
+                System.out.println("Producto ID: " + producto.getId() + ", Nombre: " + producto.getNombre() + ", Cantidad: " + cantidad);
             }
             System.out.println("_______________________");
         }
     }
-
 
     public static void eliminarPedido(Scanner scanner) {
         System.out.print("Ingrese el ID del pedido a eliminar: ");
@@ -182,11 +172,11 @@ public class Pedido {
         for (int i = 0; i < pedidosss.size(); i++) {
             if (pedidosss.get(i).getIdPedido() == idPedido) {
                 pedidosss.remove(i);
-                System.out.println("Pedido con ID " + idPedido + " eliminado exitosamente.");
+                System.out.println("Pedido con ID " + idPedido + "eliminado exitosamente.");
                 return;
             }
         }
-        System.out.println("Pedido " + idPedido + " no encontrado.");
+        System.out.println("Pedido " + idPedido + "no encontrado.");
     }
 
     public static void modificarPedido(Pedido pedido, Scanner scanner) {
@@ -206,52 +196,7 @@ public class Pedido {
             System.out.println("Pedido no encontrado.");
             return;
         }
-        /*
-        boolean continuar = true;
 
-        while (continuar) {
-            Producto.mostrarProductos(pedidoAModificar);
-            System.out.println("_______________________");
-            System.out.print("Ingrese el ID del producto que desea modificar: ");
-            int idProducto = scanner.nextInt();
-            scanner.nextLine();
-
-            Producto productoSeleccionado = null;
-            for (Producto producto : pedidoAModificar.getProductos()) {
-                if (producto != null && producto.getId() == idProducto) {
-                    productoSeleccionado = producto;
-                    break;
-                }
-            }
-
-            if (productoSeleccionado == null) {
-                System.out.println("El ID del producto ingresado no es válido.");
-                continue;
-            }
-
-            System.out.println("_______________________");
-            System.out.println("Ingrese los nuevos datos del producto:");
-            System.out.print("Nombre: ");
-            String nombre = scanner.nextLine();
-            System.out.print("Descripción: ");
-            String descripcion = scanner.nextLine();
-            System.out.print("Precio: ");
-            double precio = scanner.nextDouble();
-            System.out.print("Cantidad en stock: ");
-            int cantidadStock = scanner.nextInt();
-            scanner.nextLine();
-
-            Producto productoModificado = new Producto(idProducto, nombre, descripcion, precio, cantidadStock);
-            pedidoAModificar.modificarProducto(idProducto, productoModificado);
-            System.out.println("Producto modificado exitosamente.");
-
-            System.out.print("¿Desea modificar otro producto del pedido? (s/n): ");
-            String respuesta = scanner.nextLine();
-            if (!respuesta.equalsIgnoreCase("s")) {
-                continuar = false;
-            }
-        }
-        */
         System.out.println();
         System.out.println("MODIFICACION DEL ESTADO DEL PEDIDO");
         System.out.println();
@@ -261,8 +206,6 @@ public class Pedido {
         System.out.println();
         System.out.println("Ingrese el nuevo estado del pedido:");
         int estadooo = scanner.nextInt();
-        //System.out.print("(pendiente, en proceso, entregado): ");
-        //String estadoPedido = scanner.nextLine().trim().toLowerCase();
         String estadoPedido = "";
         switch (estadooo){
             case 1:
@@ -279,5 +222,4 @@ public class Pedido {
 
         System.out.println("Pedido modificado exitosamente.");
     }
-
 }

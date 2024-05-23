@@ -114,7 +114,7 @@ public class Producto {
 
     public static void mostrarProductos(Pedido pedido) {
         System.out.println("Lista de Productos:");
-        for (Producto producto : pedido.getProductos()) {
+        for (Producto producto : pedido.getProductos().keySet()) {
             System.out.println("ID: " + producto.getId() + ", Nombre: " + producto.getNombre() + ", Descripción: " + producto.getDescripcion() + ", Precio: " + producto.getPrecio() + ", Cantidad en Stock: " + producto.getCantidadStock());
         }
     }

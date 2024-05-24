@@ -2,6 +2,7 @@ package Gestion_Almacen;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Producto {
@@ -84,52 +85,79 @@ public class Producto {
         scanner.nextLine();
 
         Producto nuevoProducto = new Producto(id, nombre, descripcion, precio, cantidadStock);
-        pedido.agregarProducto(nuevoProducto, 1); // Cambié la cantidad a 1 ya que estamos agregando un nuevo producto único al inventario
+        pedido.agregarProducto(id, 1);
         System.out.println("Producto agregado exitosamente.");
     }
 
     public static void modificarProducto(Pedido pedido, Scanner scanner) {
-        System.out.print("ID del Producto a modificar: ");
-        int id = scanner.nextInt();
+        System.out.print("Ingrese el ID del producto que desea modificar: ");
+        int idProducto = scanner.nextInt();
         scanner.nextLine();
 
-        System.out.print("Nuevo Nombre: ");
-        String nombre = scanner.nextLine();
+        for (Map.Entry<Integer, Integer> entry : pedido.getProductos().entrySet()) {
+            if (entry.getKey() == idProducto) {
+                System.out.print("Nuevo nombre del producto: ");
+                String nombre = scanner.nextLine();
 
-        System.out.print("Nueva Descripción: ");
-        String descripcion = scanner.nextLine();
+                System.out.print("Nueva descripción del producto: ");
+                String descripcion = scanner.nextLine();
 
-        System.out.print("Nuevo Precio: ");
-        double precio = scanner.nextDouble();
+                System.out.print("Nuevo precio del producto: ");
+                double precio = scanner.nextDouble();
 
-        System.out.print("Nueva Cantidad en Stock: ");
-        int cantidadStock = scanner.nextInt();
-        scanner.nextLine();
+                System.out.print("Nueva cantidad en stock del producto: ");
+                int cantidadStock = scanner.nextInt();
+                scanner.nextLine();
 
-        Producto productoModificado = new Producto(id, nombre, descripcion, precio, cantidadStock);
-        pedido.modificarProducto(id, productoModificado);
-        System.out.println("Producto modificado exitosamente.");
+                Producto producto = encontrarProductoPorId(idProducto);
+                if (producto != null) {
+                    producto.setNombre(nombre);
+                    producto.setDescripcion(descripcion);
+                    producto.setPrecio(precio);
+                    producto.setCantidadStock(cantidadStock);
+                    System.out.println("Producto modificado exitosamente.");
+                } else {
+                    System.out.println("Producto no encontrado.");
+                }
+                return;
+            }
+        }
+        System.out.println("Producto no encontrado en el pedido.");
     }
 
     public static void eliminarProducto(Pedido pedido, Scanner scanner) {
-        System.out.print("ID del Producto a eliminar: ");
-        int id = scanner.nextInt();
+        System.out.print("Ingrese el ID del producto que desea eliminar: ");
+        int idProducto = scanner.nextInt();
         scanner.nextLine();
 
-        pedido.eliminarProducto(id);
-        System.out.println("Producto eliminado exitosamente.");
-    }
-/*
-    public static void mostrarProductos(Pedido pedido) {
-        System.out.println("Lista de Productos:");
-        for (Producto producto : pedido.getProductos().keySet()) {
-            System.out.println("ID: " + producto.getId() + ", Nombre: " + producto.getNombre() + ", Descripción: " + producto.getDescripcion() + ", Precio: " + producto.getPrecio() + ", Cantidad en Stock: " + producto.getCantidadStock());
+        for (Map.Entry<Integer, Integer> entry : pedido.getProductos().entrySet()) {
+            if (entry.getKey() == idProducto) {
+                Producto productoAEliminar = encontrarProductoPorId(idProducto);
+                if (productoAEliminar != null) {
+                    productos.remove(productoAEliminar);
+                    pedido.actualizarProductos(idProducto);
+                    System.out.println("Producto eliminado exitosamente.");
+                } else {
+                    System.out.println("Producto no encontrado.");
+                }
+                return;
+            }
         }
+        System.out.println("Producto no encontrado en el pedido.");
     }
-    */
+
+    private static Producto encontrarProductoPorId(int id) {
+        for (Producto producto : productos) {
+            if (producto.getId() == id) {
+                return producto;
+            }
+        }
+        return null;
+    }
+
     public static void mostrarProductos(Pedido pedido) {
         System.out.println("Lista de Productos:");
-        for (Producto producto : pedido.getProductos().keySet()) {
+        for (Producto producto : productos) {
             System.out.println("ID: " + producto.getId() + ", Nombre: " + producto.getNombre() + ", Descripción: " + producto.getDescripcion() + ", Precio: " + producto.getPrecio() + ", Cantidad en Stock: " + producto.getCantidadStock());
         }
     }

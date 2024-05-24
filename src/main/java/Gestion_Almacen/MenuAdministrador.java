@@ -51,14 +51,19 @@ public class MenuAdministrador {
 
                     switch (opcion) {
                         case 1:
+                            System.out.println("  ");
+                            Producto.mostrarProductos(pedido);
+                            System.out.println("_______________________");
                             Producto.agregarProducto(pedido, scanner);
                             break;
                         case 2:
+                            System.out.println("  ");
                             Producto.mostrarProductos(pedido);
                             System.out.println("_______________________");
                             Producto.modificarProducto(pedido, scanner);
                             break;
                         case 3:
+                            System.out.println("  ");
                             Producto.mostrarProductos(pedido);
                             System.out.println("_______________________");
                             Producto.eliminarProducto(pedido, scanner);
